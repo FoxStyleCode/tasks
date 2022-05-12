@@ -1,0 +1,72 @@
+
+<br>
+<div fxLayoutAlign="center">
+  <h1>Listado de tareas</h1>
+  <br>
+</div>
+
+<div fxLayoutAlign="center">
+  
+  <button mat-raised-button (click)="openDialog()">Agregar tarea</button>
+
+  <br>
+
+  <mat-progress-spinner
+    *ngIf="load"
+    class="example-margin"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+    [diameter]="40"
+    [style.margin-left]="'10px'">
+  </mat-progress-spinner>
+
+</div>
+
+<br>
+<mat-divider></mat-divider>
+
+<div fxLayout="row wrap"
+     fxLayoutAlign="center"
+     fxLayoutGap="20px"
+     fxLayout.xs="column"
+>
+
+
+
+<mat-selection-list #shoes>
+  <mat-list-item *ngFor="let task of Tasks">
+    <div fxLayoutAlign="self">
+        <div>
+          <h2 *ngIf="task.status == 'terminada' "> <del> {{ task.name }} </del></h2>
+          <h2 *ngIf="task.status == 'pendiente' "> {{ task.name }} </h2>
+        </div>
+        <div>
+
+          <button mat-icon-button color="warn" (click)="editar(task)" aria-label="Example icon button with a heart icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(task)" aria-label="Example icon button with a heart icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-checkbox *ngIf="task.status == 'pendiente' " class="example-margin"
+          (change)="changeStatus(task)"
+          ></mat-checkbox>
+        </div>
+
+    </div>
+ </mat-list-item>
+</mat-selection-list>
+
+</div>
+
+
+<!-- <mat-paginator
+  fxLayoutAlign="center"
+  [length]="length"
+  [pageSize]="pageSize"
+  (page)="pageEvent = OnPageChange($event)"
+  aria-label="Select page">
+</mat-paginator> -->
+
+
